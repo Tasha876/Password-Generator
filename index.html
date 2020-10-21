@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Password Generator</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Password Generator</h1>
+      </header>
+      <div class="card">
+        <div class="card-header">
+          <h2>Generate a Password</h2>
+        </div>
+        
+        <div class="card-body">
+          <div class="copy">
+          <label class="copy_msg">Copy successful!</label>
+          <button><i class="fas fa-copy"></i></button>
+          </div>
+          <textarea
+            readonly
+            id="password"
+            placeholder="Your Secure Password"
+            aria-label="Generated Password"
+          ></textarea>
+        </div>
+        <div id="password_criteria" class="password_criteria">
+          <div>
+            <h3>Check what you would like to include.</h3>
+            <span class="nowrap">
+              <input id="lowercase" type="checkbox">
+              <label>Lowercase letters</label>
+            </span>
+            <span class="nowrap">
+              <input id="uppercase" type="checkbox">
+              <label>Uppercase letters</label>
+            </span>
+            <span class="nowrap">
+              <input id="numeric" type="checkbox">
+              <label>Numeric characters</label>
+            </span>
+            <span class="nowrap">
+              <input id="special" type="checkbox">
+              <label>Special characters</label>
+              <br>
+            </span>
+            <label>Number of characters (8 to 128)</label>
+            <input id="num_chars" type="number" min="8" max="128">
+          </div>
+          <div>
+            <div class="warnings">
+              <div class="warning_type">
+                <p>Please check what you would like to inlcude.</p>
+              </div>
+              <div class="warning_range">
+                <p>Please enter a number in between 8 and 128.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-footer">
+          <button id="generate" class="btn">Generate Password</button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
