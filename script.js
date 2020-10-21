@@ -5,19 +5,19 @@ var uppercaseList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
 var lowercaseList = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var specialList = ["!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"];
 
-function isValidPassword(password) {
+function isValidPassword(password, up, low, spec, num) {
   var isUpper = false;
   var isLower = false;
   var isSpecial = false;
   var isNumber = false;
   for (var i = 0; i < password.length; i++) {
-    if (uppercaseList[0] <= password[i] <= uppercaseList[uppercaseList.length]){
+    if (!up || (uppercaseList[0] <= password[i] && password[i]<= uppercaseList[uppercaseList.length - 1])){
       isUpper = true;
-    } else if (lowercaseList[0] <= password[i] <= lowercaseList[lowercaseList.length]) {
-      isLower = True;
-    } else if (specialList[0] <= password[i] <= specialList[specialList.length]) {
+    } if (!low || (lowercaseList[0] <= password[i] && password[i] <= lowercaseList[lowercaseList.length - 1])) {
+      isLower = true;
+    } if (!spec || (specialList.includes(password[i]))){
       isSpecial = true;
-    } else {
+    } if (!num || (0 <= password[i] && password[i] <= 9)){
       isNumber = true;
     }
   } if (isUpper && isLower && isSpecial && isNumber) {
@@ -28,10 +28,12 @@ function isValidPassword(password) {
 }
 
 function generatePassword() {
-  let lowercase = document.querySelector("#lowercase").checked;
-  let uppercase = document.querySelector("#uppercase").checked;
-  let numeric = document.querySelector("#numeric").checked;
-  let special = document.querySelector("#special").checked;
+
+  var lowercase = document.querySelector("#lowercase").checked;
+  var uppercase = document.querySelector("#uppercase").checked;
+  var numeric = document.querySelector("#numeric").checked;
+  var special = document.querySelector("#special").checked;
+
   let numElement = document.querySelector("#num_chars");
   let num = Number(numElement.value);
   let password = "";
@@ -84,6 +86,10 @@ function generatePassword() {
     else if (type[index] == "special") {
       password += specialList[Math.floor(Math.random() * specialList.length)];
     } 
+  } 
+  
+  if (!isValidPassword(password, uppercase, lowercase, special, numeric)){
+    return generatePassword();
   } return password;
 
 }
@@ -93,12 +99,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   var password = generatePassword();
-
-  if (isValidPassword(password)){
-    return password;
-  } else {
-    password = generatePassword();
-  }
 
   passwordText.value = password;
 
