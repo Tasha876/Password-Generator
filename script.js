@@ -121,7 +121,7 @@ function copyText() {
   /* Alert the copied text */
   document.querySelector(".copy_msg").style.display = "inline";
 
-  setTimeout(hideCopyMsg, 1000);
+  setTimeout(hideCopyMsg, 1500);
 }
 
 function hideCopyMsg() {
